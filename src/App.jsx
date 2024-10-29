@@ -7,6 +7,7 @@ function App(){
   const [score,setScore]=useState(0);
   const [bestScore,setBestScore]=useState(0);
   const pokemon=["pikachu","squirtle","bulbasaur","ditto","charizard","arceus","meowth","butterfree","mewtwo","mew"];
+  shuffleArray(pokemon);
 
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -32,7 +33,6 @@ function App(){
   }
 
   useEffect(()=>{
-    shuffleArray(pokemon);
     Promise.all(pokemon.map(poke=>fetch(`https://pokeapi.co/api/v2/pokemon/${poke}/`)))
     .then(responses=>Promise.all(responses.map(res=>res.json())))
     .then(data=>setResults(data))
